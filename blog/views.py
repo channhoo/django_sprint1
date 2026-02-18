@@ -56,10 +56,10 @@ def post_detail(request, id):
         if p['id'] == id:
             post = p
             break
-    
+
     if post is None:
         raise Http404("Пост не найден")
-    
+
     context = {'post': post}
     return render(request, 'blog/detail.html', context)
 
@@ -67,4 +67,3 @@ def post_detail(request, id):
 def category_posts(request, category_slug):
     context = {'category_slug': category_slug}
     return render(request, 'blog/category.html', context)
-
