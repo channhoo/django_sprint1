@@ -45,21 +45,20 @@ posts = [
 ]
 
 
+posts_dict = {post['id']: post for post in posts}
+
+
 def index(request):
     context = {'posts': posts[::-1]}
     return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, id):
-    post = None
-    for p in posts:
-        if p['id'] == id:
-            post = p
-            break
-
+def post_detail(request, post_id):
+    post = posts_dict.get(post_id)
+    
     if post is None:
         raise Http404("Пост не найден")
-
+    
     context = {'post': post}
     return render(request, 'blog/detail.html', context)
 
